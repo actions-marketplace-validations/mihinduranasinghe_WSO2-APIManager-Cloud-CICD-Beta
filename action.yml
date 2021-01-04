@@ -1,0 +1,39 @@
+name: "wso2 apimcli"
+author: "mihinduranasinghe"
+description: "This action can be used to run apimcli ccommands."
+
+inputs:
+  usernameTargettedTenant:
+    description: "Development Tenant Username"
+    required: true
+
+  passwordTargettedTenant:
+    description: "APICloud Dev Tenant Password"
+    required: true
+
+  APIProjectName:
+    description: "API Project Name"
+    required: true
+
+  APIVersion:
+    description: "API Version"
+    required: true
+
+  PostmanCollectionTestFile:
+    description: "Postman collection"
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    # - inputToArg$1 # This can be added dynamically like below. It will be get as an input to entryppoint.sh
+    - ${{inputs.usernameTargettedTenant}}
+    - ${{inputs.passwordTargettedTenant}}
+    - ${{inputs.APIProjectName}}
+    - ${{inputs.APIVersion}}
+    - ${{inputs.PostmanCollectionTestFile}}
+
+branding:
+  icon: "check-square"
+  color: "green"

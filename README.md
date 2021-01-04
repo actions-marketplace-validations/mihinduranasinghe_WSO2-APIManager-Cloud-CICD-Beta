@@ -69,9 +69,9 @@ jobs:
       - name: Cloning repo into VM
         uses: actions/checkout@v2.3.4
 
-      - name: APIM Cloud CICD Public Action
+      - name: WSO2 APIMCloud CICD
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD@v1.2.0
+        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v1.0.0
         with:
           usernameTargettedTenant: "mihindu@wso2.com@development"
           passwordTargettedTenant: ${{secrets.DEV_TENANT_PASSWORD}}

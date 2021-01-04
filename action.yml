@@ -1,4 +1,4 @@
-name: "wso2 apimcli"
+name: "WSO2 APIMCloud CICD"
 author: "mihinduranasinghe"
 description: "This action can be used to run apimcli ccommands."
 

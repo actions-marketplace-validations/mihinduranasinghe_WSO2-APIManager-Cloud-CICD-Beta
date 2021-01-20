@@ -11,7 +11,7 @@ This action allows WSO2 API Manager Cloud users to automate CICD
 ## How this works
 
 In this version of APIMCloud CICD Action, you can automate creating an API project with given API definition and publish it in the development tenant. Then it can be tested with a postman collections.
-If all checks passed, API project can be exported from the development tenant to the production tenant.
+If all checks passed, API project will be imported to the targeted tenant.
 
 ## Pre requesits
 
@@ -52,7 +52,8 @@ Values for the "passwordTargettedTenant" must be stored in github repo secret an
 
 ### `PostmanCollectionTestFile`
 
-**Not Compulsory** Here you can give a postman collection file to test the API before publishing into production tenant
+**Not Compulsory** Postman collection file should be stored in "Testing" directory.
+Here you can give the postman collection file name to test the API before publishing into targetted tenant
 
 ## Example usage
 
@@ -60,7 +61,7 @@ Values for the "passwordTargettedTenant" must be stored in github repo secret an
 name: WSO2 APIManager Cloud CICD
 on:
   push:
-    branches: [main, prod]
+    branches: [main, development, prod]
 
 jobs:
   apim-cloud-cicd:
@@ -69,13 +70,14 @@ jobs:
       - name: Cloning repo into VM
         uses: actions/checkout@v2.3.4
 
-      - name: WSO2 APIMCloud CICD
+      # Reusable code chunk - Copy this below code chunk and use with your requirement.
+      - name: SampleStore v1.0.0 deploying to development tenant
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v1.0.0
+        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v2.0.0
         with:
-          usernameTargettedTenant: "mihindu@wso2.com@development"
-          passwordTargettedTenant: ${{secrets.DEV_TENANT_PASSWORD}}
+          usernameDevTenant: "mihindu@wso2.com@development"
+          passwordDevTenant: ${{secrets.PASSWORD}}
           APIProjectName: "SampleStore"
           APIVersion: "1.0.0"
-          #PostmanCollectionTestFile: "sample_store.postman_collection.json"
+          PostmanCollectionTestFile: "sample_store.postman_collection.json"
 ```

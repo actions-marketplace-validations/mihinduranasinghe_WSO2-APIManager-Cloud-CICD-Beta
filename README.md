@@ -75,8 +75,8 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v2.0.0
         with:
-          usernameDevTenant: "mihindu@wso2.com@development"
-          passwordDevTenant: ${{secrets.PASSWORD}}
+          usernameTargettedTenant: "mihindu@wso2.com@development"
+          passwordTargettedTenant: ${{secrets.PASSWORD}}
           APIProjectName: "SampleStore"
           APIVersion: "1.0.0"
           PostmanCollectionTestFile: "sample_store.postman_collection.json"

@@ -4,9 +4,7 @@ RUN apt install -y git
 RUN apt install -y curl
 RUN apt install -y nodejs
 
-RUN node -v
 RUN apt install -y npm
-
 RUN npm install -y -g newman@3 --unsafe-perm
 
 # FROM openjdk:jre-slim

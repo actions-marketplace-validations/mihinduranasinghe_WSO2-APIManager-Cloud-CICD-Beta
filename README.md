@@ -67,7 +67,7 @@ jobs:
   apim-cloud-cicd:
     runs-on: ubuntu-latest
     steps:
-      - name: Cloning repo into VM
+      - name: Cloning repo files into VM
         uses: actions/checkout@v2.3.4
 
       # Reusable code chunk - Copy this below code chunk and use with your requirement.

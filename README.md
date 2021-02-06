@@ -1,6 +1,6 @@
 # WSO2 APIManager Cloud CICD Action
 
-This action allows WSO2 API Manager Cloud users to automate CICD
+This actions setup allows WSO2 API Manager Cloud users to automate their APis - CICD
 
 ## Author
 
@@ -10,8 +10,9 @@ This action allows WSO2 API Manager Cloud users to automate CICD
 
 ## How this works
 
-In this version of APIMCloud CICD Action, you can automate creating an API project with given API definition and publish it in the development tenant. Then it can be tested with a postman collections.
-If all checks passed, API project will be imported to the targeted tenant.
+In this version of APIMCloud CICD Action, you can automate creating an API project with given API definition and publish it in the a targeted tenant/organization. APIs can be invoked automatically with an automatic generated API application for testing and API access tokens are generated and stored in a txt file for the clients to test the PRODUCTION and SANDBOX API end points.
+
+APIs can be continously deployed to any tenant when the code is merged into a relvanmt github repositpry branches.
 
 ## Pre requesits
 
@@ -34,21 +35,35 @@ Values for the "passwordTargettedTenant" must be stored in github repo secret an
 
 ## Inputs
 
-### `usernameTargettedTenant`
+### `usernameTargetedTenant`
 
 **Required** Dev tenant username as username@organization.com@DevtenantName
 
-### `passwordTargettedTenant`
+### `passwordTargetedTenant`
 
 **Required** Dev tenant user's password should be stored in github repo secrets and use it here like ${{secrets.PASSWORD}}
 
-### `APIProjectName`
+### `APIName`
 
 **Required** Give a name for your API Project
 
 ### `APIVersion`
 
 **Required** API Version
+
+### `needAPIAccessToken`
+
+**Not Compulsory** TRUE or FALSE
+
+This option is for generating API access tokens for your PRODUCTION and SANDBOX API URLs for testing those end points with a user given postman collection file.
+
+If you give this input as TRUE, the model will automatically create an app and subscribe it to your API and generate API access tokens and store it in API_TOKENS.txt inside "Testing folder"
+
+#### The default testing application is created as "TestingAutomationApp" if you want to create the app with your preffered name, provide the preffered name here as an input "testingAppName"
+
+### testingAppName
+
+**Not Compulsory** preffered name for the testing application
 
 ### `PostmanCollectionTestFile`
 
@@ -58,7 +73,7 @@ Here you can give the postman collection file name to test the API before publis
 ## Example usage
 
 ```yaml
-name: WSO2 APIManager Cloud CICD
+name: WSO2 APIManager Cloud CICD - Petstore API
 on:
   push:
     branches: [main, development, prod]
@@ -75,9 +90,11 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v2.0.0
         with:
-          usernameTargettedTenant: "mihindu@wso2.com@development"
-          passwordTargettedTenant: ${{secrets.PASSWORD}}
-          APIProjectName: "SampleStore"
+          usernameTargetedTenant: "mihindu@wso2.com@development"
+          passwordTargetedTenant: ${{secrets.PASSWORD}}
+          APIName: "SampleStore"
           APIVersion: "1.0.0"
-          PostmanCollectionTestFile: "sample_store.postman_collection.json"
+          needAPIAccessToken: TRUE # Not a compulsory input
+          testingAppName: "ApplicationForTesting" # Not a compulsory input
+          PostmanCollectionTestFile: "sample_store.postman_collection.json" # Not a compulsory input
 ```

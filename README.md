@@ -61,7 +61,7 @@ If you give this input as TRUE, the model will automatically create an app and s
 
 #### The default testing application is created as "TestingAutomationApp" if you want to create the app with your preffered name, provide the preffered name here as an input "testingAppName"
 
-### testingAppName
+### `testingAppName`
 
 **Not Compulsory** preffered name for the testing application
 

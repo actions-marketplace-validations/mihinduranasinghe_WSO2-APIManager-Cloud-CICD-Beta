@@ -88,7 +88,7 @@ jobs:
       # Reusable code chunk - Copy this below code chunk and use with your requirement.
       - name: SampleStore v1.0.0 deploying to development tenant
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v2.0.0
+        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v3.2.0
         with:
           usernameTargetedTenant: "mihindu@wso2.com@development"
           passwordTargetedTenant: ${{secrets.PASSWORD}}

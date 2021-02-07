@@ -301,7 +301,7 @@ if [ "$needAPIAccessToken" = true ]
                 --header "Authorization: Bearer $rest_access_token_subscribe" \
                 --header "Content-Type: application/json" \
                 --data-raw '{    
-                "validityTime": "15000",
+                "validityTime": "1500000",
                 "keyType": "PRODUCTION",
                 "accessAllowDomains": ["ALL"]
                 }'`
@@ -321,12 +321,12 @@ if [ "$needAPIAccessToken" = true ]
             # base64 encode<consumer-key:consumer-secret>
             base64key3=`echo -n "$consumer_key_PRODUCTION:$consumer_secret_PRODUCTION" | base64`
 
-            # curl -u <client id>:<client secret> -k -d "grant_type=client_credentials&validity_period=15000" -H "Content-Type:application/x-www-form-urlencoded" https://gateway.api.cloud.wso2.com:443/token
+            # curl -u <client id>:<client secret> -k -d "grant_type=client_credentials&validity_period=1500000" -H "Content-Type:application/x-www-form-urlencoded" https://gateway.api.cloud.wso2.com:443/token
             api_access_response_PRODUCTION=`curl -s --location -g --request POST 'https://gateway.api.cloud.wso2.com:443/token' \
             --header "Content-Type: application/x-www-form-urlencoded" \
             --header "Authorization: Basic $base64key3" \
             --data-urlencode "grant_type=client_credentials" \
-            --data-urlencode "validity_period=15000"`
+            --data-urlencode "validity_period=1500000"`
 
             api_access_token_PRODUCTION=`echo "$api_access_response_PRODUCTION" | jq --raw-output '.access_token'`
         
@@ -353,7 +353,7 @@ if [ "$needAPIAccessToken" = true ]
                 --header "Authorization: Bearer $rest_access_token_subscribe" \
                 --header "Content-Type: application/json" \
                 --data-raw '{    
-                "validityTime": "15000",
+                "validityTime": "1500000",
                 "keyType": "SANDBOX",
                 "accessAllowDomains": ["ALL"]
                 }'`
@@ -373,12 +373,12 @@ if [ "$needAPIAccessToken" = true ]
             # base64 encode<consumer-key:consumer-secret>
             base64key3=`echo -n "$consumer_key_SANDBOX:$consumer_secret_SANDBOX" | base64`
 
-            # curl -u <client id>:<client secret> -k -d "grant_type=client_credentials&validity_period=15000" -H "Content-Type:application/x-www-form-urlencoded" https://gateway.api.cloud.wso2.com:443/token
+            # curl -u <client id>:<client secret> -k -d "grant_type=client_credentials&validity_period=1500000" -H "Content-Type:application/x-www-form-urlencoded" https://gateway.api.cloud.wso2.com:443/token
             api_access_response_SANDBOX=`curl -s --location -g --request POST 'https://gateway.api.cloud.wso2.com:443/token' \
             --header "Content-Type: application/x-www-form-urlencoded" \
             --header "Authorization: Basic $base64key3" \
             --data-urlencode "grant_type=client_credentials" \
-            --data-urlencode "validity_period=15000"`
+            --data-urlencode "validity_period=1500000"`
 
             api_access_token_SANDBOX=`echo "$api_access_response_SANDBOX" | jq --raw-output '.access_token'`
         
